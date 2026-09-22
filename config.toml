@@ -1,23 +1,38 @@
 blobspeakModifier = 1.0
 #	Affects how likely blobspeak effects are. Higher = more likely
 #	In the mod's UI, this can be set to anything between 0.0 and 5.0
+#	In this app, the default is 1.0
 weightStage = 6
-#	Set this to a value between 1 and 8
+#	Set this to a value between 1 and 8.
 #	This would be your character's weight stage in-game
 #	For reference, 5 is the first 'immobile' stage added by Casualties: XL
+#	In this app, the default is 6
 brainRot = 0.5
 #	This is effectively your base moan/stutter chance.
 #	In-game this can be anything between 0.0 and 1.0
 #	This is tied to the gluttony moodle in-game
-#	I've been told that 0.5 is a reasonable defaulta
+#	I've been told that 0.5 is a reasonable default
 
 doBurps = true
-#	Enables burps
+#	Enables burps interrupting words
 blobStuttering = true
 #	Enables stuttering at the start of words
 blobSlurring = true
 #	Enables slurring words
 blobBreathing = true
-#	Enables breathing inserted into text
+#	Enables breathing in-between words
 isHorny = true
-#	Enables moans / hornier effects
+#	Enables moans / some slightly hornier effects
+
+formattingMode = 'discord'
+#	Can be 'discord', 'telegram', or 'fa'
+#   default is 'discord'
+#	Discord mode uses single asterisk to convey italics, and two asterisks for bold.
+#	Burps will be bold and italic
+#   **This should work for any standard Markdown implementation**
+#
+#	Telegram mode uses double underscores to convey italics. 
+#	Burps will be italic only in Telegram mode due to limitations.
+#
+#	FA/Fur Affinity mode uses [i] and [/i] for italics.
+#   **This also works for any site that uses BBCode**

@@ -8,7 +8,26 @@ breaths = ["huff", "puff", "pant", "urfh", "wheeze"]
 
 with open('config.toml','rb') as f:
     config = tomllib.load(f)
-config['telegram'] = False
+
+def formatMode(text:str,italics=True,bold=False):
+    mode = config['formattingMode']
+    if bold and italics:
+        if mode == 'telegram':
+            text = text.replace('***','__')
+        if mode == 'fa':
+            text = text.replace('***','[b][i]',1)
+            text = text.replace('***','[/b][/i]',1)
+    if bold:
+        if mode == 'fa':
+            text = text.replace('**','[b]',1)
+            text = text.replace('**','[/b]',1)
+    if italics:
+        if mode == 'telegram':
+            text = text.replace('*','__')
+        if mode == 'fa':
+            text = text.replace('*','[i]',1)
+            text = text.replace('*','[/i]',1)
+    return(text)
 
 def getBurp(intensity=4):
     burp = random.choice(burps)
@@ -21,32 +40,21 @@ def getBurp(intensity=4):
 
 
     newburp += '***'
-    if config['telegram']:
-        newburp.replace('***','__')
-    return(newburp)
+    return(formatMode(newburp,True,True))
 def getMoan(intensity=8):
-    if config['telegram']:
-        moan = "__"
-    else:
-        moan = "*"
+    moan = "*"
     moan += random.choice(moans)
     moan += moan[-1] * random.randint(1,round(intensity/2))  #  Add letters
     moan += ',' * random.randint(0,intensity)
     if random.randint(0,10) <= intensity:
         moan +="~"
-    
-    if config['telegram']:
-        moan += "__"
-    else:
-        moan += "*"
-    return(moan)
+
+    moan += '*'
+    return(formatMode(moan,True,False))
 def getBreath():
     breath = random.choice(breaths)
 
-    if not config['telegram']:
-        return (f"...*{breath}*...")
-    else:
-        return (f"...__{breath}__...")
+    return (f"...{formatMode('*'+breath+'*',True,False)}...")
 def slur(word):
     result = []
     for char in word:
@@ -93,7 +101,7 @@ def getRates(weight,brainrot):
     return(rates)
 
 def microCommands(micros:str)->list:
-    out = {'telegram': False}
+    out = {}
     for micro in micros.split(' '):
         if micro.replace('mod','') != micro:    #   Blobspeak modifier
             out['blobspeakModifier'] = float(micro.replace('mod',''))
@@ -101,8 +109,11 @@ def microCommands(micros:str)->list:
             out['weightStage'] = int(micro.replace('ws',''))
         if micro.replace('br','') != micro:     #   Brainrot
             out['brainRot'] = float(micro.replace('br',''))
+            
         if micro.replace('tg','') != micro:     #   Telegram mode
-            out['telegram'] = True
+            out['formattingMode'] = 'telegram'
+        if micro.replace('fa','') != micro:		#	FA mode
+            out['formattingMode'] = 'fa'
     config.update(out)
     return(True)
 def talkBlobby(original):
