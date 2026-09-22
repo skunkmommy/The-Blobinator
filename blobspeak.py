@@ -40,7 +40,7 @@ def getBurp(intensity=4):
 
 
     newburp += '***'
-    return(formatMode(newburp,True,True))
+    return(formatMode((''.join([newburp[0].lower(),newburp[1:]])),True,True))
 def getMoan(intensity=8):
     moan = "*"
     moan += random.choice(moans)
