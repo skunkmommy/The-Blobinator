@@ -1,5 +1,5 @@
 # The Blobinator
-A Python implementation of blobspeak based on the one used in Casualties: XL.
+A Python implementation of blobspeak based on the one used in [Casualties: XL](https://github.com/webbero929/CasualtiesExtra-Public/releases).
 Big thanks to [MarkSuckerberg](https://github.com/MarkSuckerberg) for writing the original code.
 This one feature is *the* reason that mod clicked with me as much as it does.
 I have never seen a game or mod mess with my text chat in quite this way. It's simply ***wonderous***.
