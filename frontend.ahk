@@ -1,7 +1,7 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-myGui := Gui(, "Run app.py")
+myGui := Gui(, "The Blobinator")
 myGui.Add("Text", , "Enter text")
 argBox := myGui.Add("Edit", "w250")
 btn := myGui.Add("Button", "Default w80", "OK")
@@ -10,6 +10,7 @@ btn.OnEvent("Click", RunApp)
 myGui.OnEvent("Close", HideGui)
 myGui.OnEvent("Escape", (*) => myGui.Hide())
 
+;	Hotkey, change this if you'd rather use something else to open the window
 #\:: {
     argBox.Value := ""
     myGui.Show()
@@ -18,7 +19,7 @@ myGui.OnEvent("Escape", (*) => myGui.Hide())
 
 HideGui(*) {
     myGui.Hide()
-    return true  ; hide instead of destroying the window
+    return true
 }
 
 RunApp(*) {
@@ -38,10 +39,8 @@ RunApp(*) {
 		exec := shell.Exec(A_ComSpec ' /c "' cmd ' 2>&1"')
 		output := exec.StdOut.ReadAll()
 
-		; Normalize line endings and drop trailing newlines so no extra Enter is typed
 		output := RTrim(StrReplace(output, "`r`n", "`n"), "`n")
 
-		; SendText types the output literally (no special-key interpretation)
 		SendText(output)
 	}
 }

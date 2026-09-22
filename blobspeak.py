@@ -65,7 +65,10 @@ def slur(word):
         result+=char
     return(''.join(result))
 def stutter(word):
-    return(word[0]+ "-" +word)
+    if word[0].isalpha():
+        return(word[0]+ "-" +word)
+    else:
+        return(word)
 
 def getRates(weight,brainrot):
     rates = [0,0,0,0,0]
@@ -143,6 +146,8 @@ def blobSpeak(text,burpChance=0.2,moanChance=0.2,stutterChance=0.2,breathChance=
 
         if random.random() < stutterChance:
             word = stutter(word)
+            if random.random() < 0.1:
+                word = stutter(word)
 
         if random.random() < slurChance:
             word = slur(word)
