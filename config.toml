@@ -1,0 +1,23 @@
+blobspeakModifier = 1.0
+#	Affects how likely blobspeak effects are. Higher = more likely
+#	In the mod's UI, this can be set to anything between 0.0 and 5.0
+weightStage = 6
+#	Set this to a value between 1 and 8
+#	This would be your character's weight stage in-game
+#	For reference, 5 is the first 'immobile' stage added by Casualties: XL
+brainRot = 0.5
+#	This is effectively your base moan/stutter chance.
+#	In-game this can be anything between 0.0 and 1.0
+#	This is tied to the gluttony moodle in-game
+#	I've been told that 0.5 is a reasonable defaulta
+
+doBurps = true
+#	Enables burps
+blobStuttering = true
+#	Enables stuttering at the start of words
+blobSlurring = true
+#	Enables slurring words
+blobBreathing = true
+#	Enables breathing inserted into text
+isHorny = true
+#	Enables moans / hornier effects
