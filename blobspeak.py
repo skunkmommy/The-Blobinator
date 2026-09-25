@@ -9,7 +9,7 @@ breaths = ["huff", "puff", "pant", "urfh", "wheeze"]
 with open('config.toml','rb') as f:
     config = tomllib.load(f)
 
-def formatMode(text:str,italics=True,bold=False):
+def format(text:str,italics=True,bold=False):
     mode = config['formattingMode']
     if bold and italics:
         if mode == 'telegram':
@@ -38,9 +38,8 @@ def getBurp(intensity=4):
             letter = letter.upper()
         newburp += letter
 
-
     newburp += '***'
-    return(formatMode((''.join([newburp[0].lower(),newburp[1:]])),True,True))
+    return(format((''.join([newburp[0].lower(),newburp[1:]])),True,True))
 def getMoan(intensity=8):
     moan = "*"
     moan += random.choice(moans)
@@ -50,11 +49,11 @@ def getMoan(intensity=8):
         moan +="~"
 
     moan += '*'
-    return(formatMode(moan,True,False))
+    return(format(moan,True,False))
 def getBreath():
     breath = random.choice(breaths)
 
-    return (f"...{formatMode('*'+breath+'*',True,False)}...")
+    return (f"...{format('*'+breath+'*',True,False)}...")
 def slur(word):
     result = []
     for char in word:
@@ -143,6 +142,18 @@ def blobSpeak(text,burpChance=0.2,moanChance=0.2,stutterChance=0.2,breathChance=
                 word = word[1:-1]
             result = result + word + ' '
             continue
+        if len(word) >= 10: #   Burp interrupts
+            burpCounter = round(len(word)/10)
+            wordNew = ""    #   I want to die
+            for char in word:
+                    if random.random() < burpChance/2 and burpCounter:
+                        char += getBurp()
+                        wordNew += char
+                        burpCounter -= 1
+                    else:
+                        wordNew += char
+            word = wordNew
+
 
         if random.random() < stutterChance:
             word = stutter(word)
