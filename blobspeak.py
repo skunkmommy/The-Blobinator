@@ -54,14 +54,16 @@ def getBreath():
     breath = random.choice(breaths)
 
     return (f"...{format('*'+breath+'*',True,False)}...")
-def slur(word):
+def slur(word,slurChance=0.6):
     result = []
     for char in word:
-        if char.lower() in ['a','e','i','o','u']:
-            char += 'h'
-        if char.lower() in ['z','s']:
-            char = 'th'
-        result+=char
+        if random.random() < slurChance:
+            if char.lower() in ['a','e','i','o','u']:
+                char += 'h'
+            if char.lower() in ['z','s']:
+                char = 'th'
+        result += char
+        
     return(''.join(result))
 def stutter(word):
     if word[0].isalpha():
