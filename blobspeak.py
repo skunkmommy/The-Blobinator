@@ -144,7 +144,7 @@ def blobSpeak(text,burpChance=0.2,moanChance=0.2,stutterChance=0.2,breathChance=
                 word = word[1:-1]
             result = result + word + ' '
             continue
-        if len(word) >= 10: #   Burp interrupts
+        if len(word) >= 13: #   Burp interrupts
             burpCounter = round(len(word)/10)
             wordNew = ""    #   I want to die
             for char in word:
